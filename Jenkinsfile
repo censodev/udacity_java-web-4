@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'docker build -t censodev/udacity_java-web-4 .'
+        sh 'docker build -t udacity_java-web-4:latest .'
       }
     }
 
