@@ -1,6 +1,6 @@
 version: "3"
 services:
-  docker:
+  jenkins-docker:
     image: docker:dind
     privileged: true
     ports:
@@ -12,9 +12,9 @@ services:
       - "jenkins-data:/var/jenkins_home"
     networks:
       - jenkins
-  blueocean:
-    image: myjenkins-blueocean:lts-jdk11
-    build: .
+  jenkins-blueocean:
+    image: jenkins-blueocean:lts-jdk11
+    build: ./jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -27,8 +27,23 @@ services:
       - "jenkins-data:/var/jenkins_home"
     networks:
       - jenkins
+  splunk:
+    image: splunk/splunk:latest
+    ports:
+      - "8000:8000"
+    environment:
+      SPLUNK_PASSWORD: password
+      SPLUNK_START_ARGS: --accept-license"
+    volumes:
+      - "splunk-var:/opt/splunk/var"
+      - "splunk-etc:/opt/splunk/etc"
+    networks:
+      - splunk
 networks:
   jenkins:
+  splunk:
 volumes:
   jenkins-docker-certs:
   jenkins-data:
+  splunk-var:
+  splunk-etc:
