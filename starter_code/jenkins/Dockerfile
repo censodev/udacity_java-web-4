@@ -8,12 +8,5 @@ RUN echo "deb [arch=$(dpkg --print-architecture) \
   https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 RUN apt-get update && apt-get install -y docker-ce-cli
-
-# RUN ls -R $JAVA_HOME
-# COPY ./updates.jenkins.io.crt /tmp/updates.jenkins.io.crt
-# RUN keytool -import -file /tmp/updates.jenkins.io.crt \
-#     -keystore $JAVA_HOME/lib/security/cacerts \
-#     -storepass "changeit"
-
 USER jenkins
 RUN jenkins-plugin-cli --plugins "blueocean:1.25.8 docker-workflow:521.v1a_a_dd2073b_2e"
