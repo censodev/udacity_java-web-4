@@ -17,7 +17,6 @@
 
 	<properties>
 		<java.version>11</java.version>
-    	<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -47,6 +46,11 @@
 			<artifactId>jauth-lib-spring-web</artifactId>
 			<version>0.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.splunk.logging</groupId>
+			<artifactId>splunk-library-javalogging</artifactId>
+			<version>1.11.7</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -73,4 +77,11 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>splunk-artifactory</id>
+			<name>Splunk Releases</name>
+			<url>https://splunk.jfrog.io/splunk/ext-releases-local</url>
+		</repository>
+	</repositories>
 </project>
