@@ -36,8 +36,9 @@ class SareetaApplicationTests {
     void fullFlow() throws IOException, InterruptedException {
         var createUserRes = createUser("admin", "admin", "admin1");
         assertEquals(400, createUserRes.statusCode());
-
         createUserRes = createUser("admin", "admin", "admin");
+        assertEquals(400, createUserRes.statusCode());
+        createUserRes = createUser("admin", "12345678", "12345678");
         assertEquals(200, createUserRes.statusCode());
         var createUserResBody = objectMapper.readValue(createUserRes.body(), User.class);
         assertEquals("admin", createUserResBody.getUsername());
@@ -45,8 +46,7 @@ class SareetaApplicationTests {
 
         var loginRes = login("admin", "admin1");
         assertEquals(401, loginRes.statusCode());
-
-        loginRes = login("admin", "admin");
+        loginRes = login("admin", "12345678");
         assertEquals(200, loginRes.statusCode());
         var token = loginRes.headers().firstValue(HttpHeaders.AUTHORIZATION).orElse(null);
         assertNotNull(token);

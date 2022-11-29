@@ -56,6 +56,9 @@ public class UserController {
         if (!createUserRequest.getPassword().equals(createUserRequest.getConfPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "confirmed password is not correct");
         }
+		if (createUserRequest.getPassword().length() < 8) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "password must be more than or equals 8 characters");
+		}
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
 		user.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
