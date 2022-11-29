@@ -7,6 +7,7 @@ import com.example.demo.model.persistence.repositories.UserRepository;
 import com.example.demo.model.requests.CreateUserRequest;
 import com.example.demo.model.requests.LoginRequest;
 import io.github.censodev.jauthlibcore.TokenProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class UserController {
     @Autowired
     private TokenProvider tokenProvider;
@@ -61,6 +63,7 @@ public class UserController {
 		cartRepository.save(cart);
 		user.setCart(cart);
 		userRepository.save(user);
+		log.info("createUser successfully: id = {}", user.getId());
 		return ResponseEntity.ok(user);
 	}
 
