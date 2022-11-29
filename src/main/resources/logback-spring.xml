@@ -2,20 +2,11 @@
 <configuration>
     <appender name="splunk_http" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
         <url>http://localhost:8088</url>
-        <token>18c482f2-f2c5-4fc0-9d04-baa2476dfc9d</token>
+        <token>2623ba73-8ec8-430d-9f59-c52280b4ec87</token>
         <index>splunk_log</index>
-        <source>splunk_test</source>
-        <sourcetype>splunk_test</sourcetype>
         <disableCertificateValidation>true</disableCertificateValidation>
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>
-                {
-                "level": "%level",
-                "thread": "%thread",
-                "class": "%logger{40}",
-                "message": "%msg"
-                }
-            </pattern>
+            <pattern>%msg</pattern>
         </layout>
     </appender>
 
